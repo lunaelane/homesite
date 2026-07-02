@@ -121,6 +121,43 @@ textarea.fin{resize:vertical;line-height:1.6}
   .heroctas{flex-direction:column}
   .heroctas a{width:100%;justify-content:center}
 }
+
+/* ===== 모바일 캐러셀 / 하단 CTA (기본 숨김) ===== */
+.mCarousel{display:none}
+#mCta{display:none}
+
+@media(max-width:880px){
+  #sysTrack{display:none !important}
+  .mCarousel{display:block;padding:68px 0}
+  .mCarTrack{display:flex;gap:14px;overflow-x:auto;scroll-snap-type:x mandatory;padding:4px 22px 8px;-webkit-overflow-scrolling:touch;scrollbar-width:none;-ms-overflow-style:none}
+  .mCarTrack::-webkit-scrollbar{display:none}
+  .mCard{flex:0 0 86%;scroll-snap-align:center;border:1px solid #E6E6E6;border-radius:14px;overflow:hidden;background:#fff;box-shadow:0 10px 28px rgba(27,42,74,.10)}
+  .mCard img{width:100%;aspect-ratio:16/10;object-fit:contain;background:#fff}
+  .mCardLabel{display:flex;align-items:center;gap:10px;padding:14px 16px;border-top:1px solid #E6E6E6}
+  .mCardLabel .num{font-size:12px;font-weight:700;letter-spacing:1px;color:#9AA3B5}
+  .mCardLabel .tt{font-size:15px;font-weight:600;color:#1B2A4A}
+  .mCarDots{display:flex;justify-content:center;align-items:center;gap:9px;margin-top:20px}
+  .mCarDots span{width:7px;height:7px;border-radius:50%;background:#D8DCE4;transition:background .3s,transform .3s}
+  .mCarDots span.on{background:#1B2A4A;transform:scale(1.25)}
+}
+
+@media(max-width:780px){
+  .soha-navlinks .nlink{width:100%;padding:16px 24px;font-size:16px;font-weight:600;border-bottom:1px solid rgba(255,255,255,.08)}
+  .soha-navlinks .nbtn{margin:12px 24px;border-radius:10px;padding:15px;text-align:center;background:#fff;color:#1B2A4A}
+  #mCta{position:fixed;left:0;right:0;bottom:0;z-index:200;display:flex;gap:10px;padding:12px 16px calc(12px + env(safe-area-inset-bottom));background:rgba(255,255,255,.94);backdrop-filter:blur(14px);border-top:1px solid #E6E6E6}
+  #mCta a{flex:1;display:flex;align-items:center;justify-content:center;height:50px;border-radius:11px;font-size:15px;font-weight:700;text-decoration:none;transition:transform .15s}
+  #mCta a.p{background:#1B2A4A;color:#fff;box-shadow:0 8px 20px rgba(27,42,74,.28)}
+  #mCta a.s{background:#fff;color:#1B2A4A;border:1.5px solid #1B2A4A}
+  #mCta a:active{transform:scale(.97)}
+  footer{padding-bottom:130px !important}
+}
+
+@media(max-width:640px){
+  .btnw,.btno{border-radius:11px;padding:16px 24px;font-size:15.5px;font-weight:700}
+  #top{padding:72px 0 60px}
+  #top h1{font-size:clamp(30px,8.4vw,38px)}
+  .h2{font-size:clamp(23px,6.4vw,30px)}
+}
 </style>
 </head>
 <body>
@@ -334,6 +371,31 @@ textarea.fin{resize:vertical;line-height:1.6}
       </div>
     </div>
   </div>
+
+  <div class="mCarousel">
+    <div class="wrap" style="text-align:center;margin-bottom:24px">
+      <div class="eyebrow" style="margin-bottom:12px">THE SYSTEM</div>
+      <h2 class="h2" style="margin-bottom:12px">실제 시스템 화면</h2>
+      <p style="color:#566074;font-size:15px">옆으로 넘겨서 확인해 보세요.</p>
+    </div>
+    <div class="mCarTrack" id="mCarTrack">
+      <div class="mCard">
+        <img src="aa.PNG" alt="상품 등록 화면" loading="lazy">
+        <div class="mCardLabel"><span class="num">01</span><span class="tt">상품 등록 화면</span></div>
+      </div>
+      <div class="mCard">
+        <img src="사진 1.PNG" alt="플랫폼 연동 화면" loading="lazy">
+        <div class="mCardLabel"><span class="num">02</span><span class="tt">플랫폼 연동 화면</span></div>
+      </div>
+      <div class="mCard">
+        <img src="통계.PNG" alt="주문·판매 현황 화면" loading="lazy">
+        <div class="mCardLabel"><span class="num">03</span><span class="tt">주문·판매 현황 화면</span></div>
+      </div>
+    </div>
+    <div class="mCarDots" id="mCarDots">
+      <span class="on"></span><span></span><span></span>
+    </div>
+  </div>
 </section>
 
 <section id="about" class="sec" style="background:#1B2A4A">
@@ -402,6 +464,11 @@ textarea.fin{resize:vertical;line-height:1.6}
     <div class="fright" style="font-size:13.5px;color:#9DB0D0;text-align:right;line-height:1.7">contact@lunaelane.com<br>&copy; 2026 LUNAELANE Inc. All rights reserved.</div>
   </div>
 </footer>
+
+<div id="mCta">
+  <a class="s" href="#" onclick="openModal('inquiry');return false;">문의하기</a>
+  <a class="p" href="#" onclick="openModal('brochure');return false;">소개자료 받기</a>
+</div>
 
 <div id="modalOverlay" onclick="closeModal()">
   <div class="mbox" onclick="event.stopPropagation()">
@@ -557,6 +624,7 @@ document.getElementById('modalForm').addEventListener('submit', function(e){
   var sChk = successEl ? successEl.querySelector('.chk') : null;
   var sTxt = successEl ? successEl.querySelector('.txt') : null;
   if (!track || frames.length < 2) return;
+  if (matchMedia('(max-width:880px)').matches) return;
   var n = frames.length;
   var raf = null;
   function clamp01(x){ return x < 0 ? 0 : x > 1 ? 1 : x; }
@@ -612,6 +680,28 @@ document.getElementById('modalForm').addEventListener('submit', function(e){
   addEventListener('scroll', onScroll, { passive: true });
   addEventListener('resize', onScroll, { passive: true });
   apply();
+})();
+
+// ── 모바일 캐러셀 도트 ──
+(function(){
+  var trackEl = document.getElementById('mCarTrack');
+  var dotsWrap = document.getElementById('mCarDots');
+  if (!trackEl || !dotsWrap) return;
+  var dots = [].slice.call(dotsWrap.querySelectorAll('span'));
+  if (dots.length < 2) return;
+  var raf = null;
+  function update(){
+    raf = null;
+    var max = trackEl.scrollWidth - trackEl.clientWidth;
+    var ratio = max > 0 ? trackEl.scrollLeft / max : 0;
+    var active = Math.round(ratio * (dots.length - 1));
+    if (active < 0) active = 0;
+    if (active > dots.length - 1) active = dots.length - 1;
+    dots.forEach(function(d, i){ d.classList.toggle('on', i === active); });
+  }
+  trackEl.addEventListener('scroll', function(){
+    if (raf == null) raf = requestAnimationFrame(update);
+  }, { passive: true });
 })();
 
 // ── lucide 아이콘 ──
