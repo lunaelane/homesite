@@ -129,10 +129,10 @@ textarea.fin{resize:vertical;line-height:1.6}
 @media(max-width:880px){
   #sysTrack{display:none !important}
   .mCarousel{display:block;padding:68px 0}
-  .mCarTrack{display:flex;gap:12px;overflow-x:auto;scroll-snap-type:x mandatory;padding:4px 14px 8px;-webkit-overflow-scrolling:touch;scrollbar-width:none;-ms-overflow-style:none}
+  .mCarTrack{display:flex;gap:12px;overflow-x:auto;scroll-snap-type:x mandatory;padding:4px 12px 8px;-webkit-overflow-scrolling:touch;scrollbar-width:none;-ms-overflow-style:none;overscroll-behavior-x:contain}
   .mCarTrack::-webkit-scrollbar{display:none}
-  .mCard{flex:0 0 92%;scroll-snap-align:center;border:1px solid #E6E6E6;border-radius:14px;overflow:hidden;background:#fff;box-shadow:0 10px 28px rgba(27,42,74,.10)}
-  .mCard img{width:100%;aspect-ratio:3/2;object-fit:contain;background:#fff}
+  .mCard{flex:0 0 95%;scroll-snap-align:center;scroll-snap-stop:always;border:1px solid #E6E6E6;border-radius:14px;overflow:hidden;background:#fff;box-shadow:0 10px 28px rgba(27,42,74,.10)}
+  .mCard img{width:100%;aspect-ratio:4/3;object-fit:contain;background:#fff}
   .mCardLabel{display:flex;align-items:center;gap:10px;padding:14px 16px;border-top:1px solid #E6E6E6}
   .mCardLabel .num{font-size:12px;font-weight:700;letter-spacing:1px;color:#9AA3B5}
   .mCardLabel .tt{font-size:15px;font-weight:600;color:#1B2A4A}
@@ -603,7 +603,12 @@ document.getElementById('modalForm').addEventListener('submit', function(e){
     body: JSON.stringify(payload)
   })
   .then(function(r){ if(!r.ok) throw new Error('bad status'); return r.json(); })
-  .then(showSent)
+  .then(function(data){
+    // FormSubmit은 미인증/오류 시에도 HTTP 200을 주므로 success 값을 직접 확인
+    var ok = data && (data.success === true || data.success === 'true');
+    if (!ok) throw new Error((data && data.message) || 'not delivered');
+    showSent();
+  })
   .catch(function(){
     window.location.href = 'mailto:contact@lunaelane.com?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(body);
     showSent();
