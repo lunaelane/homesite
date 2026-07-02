@@ -93,7 +93,7 @@ textarea.fin{resize:vertical;line-height:1.6}
   .soha-flow3{grid-template-columns:1fr 1fr !important}
 }
 @media(max-width:780px){
-  .soha-navlinks{display:none !important;position:absolute;top:62px;left:0;right:0;flex-direction:column;align-items:flex-start;background:#1B2A4A;padding:20px 28px;gap:16px}
+  .soha-navlinks{display:none !important;position:absolute;top:62px;left:0;right:0;flex-direction:column;align-items:stretch !important;background:#1B2A4A;padding:6px 0 12px;gap:0 !important}
   .soha-navlinks[data-open="1"]{display:flex !important}
   .soha-toggle{display:flex !important}
 }
@@ -142,8 +142,8 @@ textarea.fin{resize:vertical;line-height:1.6}
 }
 
 @media(max-width:780px){
-  .soha-navlinks .nlink{width:100%;padding:16px 24px;font-size:16px;font-weight:600;border-bottom:1px solid rgba(255,255,255,.08)}
-  .soha-navlinks .nbtn{margin:12px 24px;border-radius:10px;padding:15px;text-align:center;background:#fff;color:#1B2A4A}
+  .soha-navlinks .nlink{width:100%;padding:9px 22px;font-size:14px;font-weight:500;border-bottom:1px solid rgba(255,255,255,.08)}
+  .soha-navlinks .nbtn{display:block;margin:9px 22px 2px;border-radius:8px;padding:10px;text-align:center;background:#fff;color:#1B2A4A;font-size:14px}
   #mCta{position:fixed;left:0;right:0;bottom:0;z-index:200;display:flex;gap:10px;padding:12px 16px calc(12px + env(safe-area-inset-bottom));background:rgba(255,255,255,.94);backdrop-filter:blur(14px);border-top:1px solid #E6E6E6}
   #mCta a{flex:1;display:flex;align-items:center;justify-content:center;height:50px;border-radius:11px;font-size:15px;font-weight:700;text-decoration:none;transition:transform .15s}
   #mCta a.p{background:#1B2A4A;color:#fff;box-shadow:0 8px 20px rgba(27,42,74,.28)}
@@ -153,10 +153,20 @@ textarea.fin{resize:vertical;line-height:1.6}
 }
 
 @media(max-width:640px){
-  .btnw,.btno{border-radius:11px;padding:16px 24px;font-size:15.5px;font-weight:700}
-  #top{padding:72px 0 60px}
-  #top h1{font-size:clamp(30px,8.4vw,38px)}
-  .h2{font-size:clamp(23px,6.4vw,30px)}
+  /* 모바일 전반 축소 (인라인 스타일 오버라이드 위해 !important 사용) */
+  .sec{padding:44px 0;border-top:1px solid #E6E6E6}
+  #problem{border-top:none}
+  #about,#contact{border-top:1px solid rgba(255,255,255,.14)}
+  #team{border-top:1px solid #E6E6E6}
+  .mCarousel{padding:44px 0 !important;border-top:1px solid #E6E6E6}
+  #top{padding:52px 0 44px}
+  #top h1{font-size:clamp(22px,5.8vw,26px) !important;line-height:1.32 !important;margin-bottom:14px !important}
+  #top p{font-size:13.5px !important;line-height:1.65 !important;margin-bottom:24px !important}
+  .eyebrow{font-size:11px;margin-bottom:8px}
+  .h2{font-size:clamp(18px,4.6vw,21px);margin-bottom:10px}
+  #about h2,#contact h2{font-size:clamp(18px,4.6vw,21px) !important}
+  .lead{font-size:13.5px}
+  .btnw,.btno{border-radius:9px;padding:12px 18px;font-size:13.5px;font-weight:600}
 }
 </style>
 </head>
