@@ -201,7 +201,7 @@ textarea.fin{resize:vertical;line-height:1.6}
       <a href="#roles" class="nlink" onclick="closeMenu()">역할 분담</a>
       <a href="#about" class="nlink" onclick="closeMenu()">회사 소개</a>
       <a href="#team" class="nlink" onclick="closeMenu()">팀</a>
-      <a href="#" class="nbtn" onclick="openModal('inquiry');return false;">상담신청</a>
+      <a href="#" class="nbtn" onclick="openModal('inquiry');return false;">문의하기</a>
     </div>
   </div>
 </nav>
@@ -215,7 +215,7 @@ textarea.fin{resize:vertical;line-height:1.6}
     <p style="font-size:clamp(16px,2vw,19px);line-height:1.78;color:#D5DCEA;max-width:560px;margin-bottom:38px">루네레인은 한국 패션 쇼핑몰이 추가적인 해외 운영 부담 없이 판매 채널을 확장할 수 있도록 지원합니다. 별도의 해외 운영 인력이나 플랫폼 학습 없이, 기존 운영을 유지하면서 해외 판매를 시작하세요.</p>
     <div class="heroctas" style="display:flex;gap:12px;flex-wrap:wrap">
       <a href="#" class="btnw" onclick="openModal('brochure');return false;">서비스 소개자료 받기</a>
-      <a href="#" class="btno" onclick="openModal('inquiry');return false;">상담신청</a>
+      <a href="#" class="btno" onclick="openModal('inquiry');return false;">문의하기</a>
     </div>
   </div>
 </header>
@@ -483,7 +483,7 @@ textarea.fin{resize:vertical;line-height:1.6}
     <p class="soha-rv" style="color:#AEBDD8;font-size:17px;max-width:520px;margin:0 auto 36px;line-height:1.7">관심 있으시다면 서비스 소개자료를 받아보시거나 편하게 문의해 주세요.</p>
     <div class="soha-rv heroctas" style="display:flex;gap:12px;flex-wrap:wrap;justify-content:center">
       <a href="#" class="btnw" onclick="openModal('brochure');return false;">서비스 소개자료 받기</a>
-      <a href="#" class="btno" onclick="openModal('inquiry');return false;">상담신청</a>
+      <a href="#" class="btno" onclick="openModal('inquiry');return false;">문의하기</a>
     </div>
   </div>
 </section>
@@ -496,7 +496,7 @@ textarea.fin{resize:vertical;line-height:1.6}
 </footer>
 
 <div id="mCta">
-  <a class="s" href="#" onclick="openModal('inquiry');return false;">상담신청</a>
+  <a class="s" href="#" onclick="openModal('inquiry');return false;">문의하기</a>
   <a class="p" href="#" onclick="openModal('brochure');return false;">소개자료 받기</a>
 </div>
 
@@ -553,7 +553,7 @@ function openModal(kind){
   modalKind = kind;
   closeMenu();
   var isInq = kind === 'inquiry';
-  document.getElementById('modalTitle').textContent = isInq ? '상담신청' : '서비스 소개자료 받기';
+  document.getElementById('modalTitle').textContent = isInq ? '문의하기' : '서비스 소개자료 받기';
   document.getElementById('modalSub').textContent = isInq
     ? '상담을 신청해 주시면 담당자가 빠르게 연락드리겠습니다.'
     : '정보를 남겨주시면 서비스 소개자료를 이메일로 보내드립니다.';
