@@ -515,7 +515,6 @@ textarea.fin{resize:vertical;line-height:1.6}
         <div><label for="b-company" class="flabel">쇼핑몰명 <span style="color:#C0392B">*</span></label><input id="b-company" type="text" placeholder="쇼핑몰 이름" class="fin"></div>
         <div><label for="b-email" class="flabel">이메일 <span style="color:#C0392B">*</span></label><input id="b-email" type="email" placeholder="name@company.com" class="fin"></div>
         <div><label for="b-phone" class="flabel">연락처</label><input id="b-phone" type="tel" placeholder="010-0000-0000" class="fin"></div>
-        <div><label for="b-url" class="flabel">쇼핑몰 URL</label><input id="b-url" type="text" placeholder="https://" class="fin"></div>
       </div>
       <div id="fieldsInquiry" class="hidden" style="display:flex;flex-direction:column;gap:15px">
         <div><label for="i-name" class="flabel">성함 <span style="color:#C0392B">*</span></label><input id="i-name" type="text" placeholder="홍길동" class="fin"></div>
@@ -570,7 +569,7 @@ function openModal(kind){
 function setRequired(groupId, on){
   var els = document.getElementById(groupId).querySelectorAll('input,textarea');
   els.forEach(function(el){
-    var optional = el.id === 'b-phone' || el.id === 'b-url' || el.id === 'i-phone';
+    var optional = el.id === 'b-phone' || el.id === 'i-phone';
     el.required = on && !optional;
   });
 }
@@ -586,10 +585,10 @@ document.getElementById('modalForm').addEventListener('submit', function(e){
   var g = function(id){ var el = document.getElementById(id); return el ? el.value.trim() : ''; };
   var payload, subject, body;
   if (modalKind === 'brochure'){
-    var name=g('b-name'), company=g('b-company'), email=g('b-email'), phone=g('b-phone'), url=g('b-url');
+    var name=g('b-name'), company=g('b-company'), email=g('b-email'), phone=g('b-phone');
     subject = '[소개자료 요청] ' + company + ' / ' + name;
-    payload = { _subject: subject, 구분: '서비스 소개자료 요청', 성함: name, 쇼핑몰명: company, 이메일: email, 연락처: phone, '쇼핑몰 URL': url };
-    body = ['SOHA 서비스 소개자료를 요청합니다.','','성함: '+name,'쇼핑몰명: '+company,'이메일: '+email,'연락처: '+phone,'쇼핑몰 URL: '+url].join('\n');
+    payload = { _subject: subject, 구분: '서비스 소개자료 요청', 성함: name, 쇼핑몰명: company, 이메일: email, 연락처: phone };
+    body = ['SOHA 서비스 소개자료를 요청합니다.','','성함: '+name,'쇼핑몰명: '+company,'이메일: '+email,'연락처: '+phone].join('\n');
   } else {
     var iname=g('i-name'), iemail=g('i-email'), iphone=g('i-phone'), imsg=g('i-msg');
     subject = '[상담신청] ' + iname;
