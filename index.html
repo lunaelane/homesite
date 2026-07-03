@@ -201,7 +201,7 @@ textarea.fin{resize:vertical;line-height:1.6}
       <a href="#roles" class="nlink" onclick="closeMenu()">역할 분담</a>
       <a href="#about" class="nlink" onclick="closeMenu()">회사 소개</a>
       <a href="#team" class="nlink" onclick="closeMenu()">팀</a>
-      <a href="#" class="nbtn" onclick="openModal('inquiry');return false;">문의하기</a>
+      <a href="#" class="nbtn" onclick="openModal('inquiry');return false;">상담신청</a>
     </div>
   </div>
 </nav>
@@ -215,7 +215,7 @@ textarea.fin{resize:vertical;line-height:1.6}
     <p style="font-size:clamp(16px,2vw,19px);line-height:1.78;color:#D5DCEA;max-width:560px;margin-bottom:38px">루네레인은 한국 패션 쇼핑몰이 추가적인 해외 운영 부담 없이 판매 채널을 확장할 수 있도록 지원합니다. 별도의 해외 운영 인력이나 플랫폼 학습 없이, 기존 운영을 유지하면서 해외 판매를 시작하세요.</p>
     <div class="heroctas" style="display:flex;gap:12px;flex-wrap:wrap">
       <a href="#" class="btnw" onclick="openModal('brochure');return false;">서비스 소개자료 받기</a>
-      <a href="#" class="btno" onclick="openModal('inquiry');return false;">문의하기</a>
+      <a href="#" class="btno" onclick="openModal('inquiry');return false;">상담신청</a>
     </div>
   </div>
 </header>
@@ -483,7 +483,7 @@ textarea.fin{resize:vertical;line-height:1.6}
     <p class="soha-rv" style="color:#AEBDD8;font-size:17px;max-width:520px;margin:0 auto 36px;line-height:1.7">관심 있으시다면 서비스 소개자료를 받아보시거나 편하게 문의해 주세요.</p>
     <div class="soha-rv heroctas" style="display:flex;gap:12px;flex-wrap:wrap;justify-content:center">
       <a href="#" class="btnw" onclick="openModal('brochure');return false;">서비스 소개자료 받기</a>
-      <a href="#" class="btno" onclick="openModal('inquiry');return false;">문의하기</a>
+      <a href="#" class="btno" onclick="openModal('inquiry');return false;">상담신청</a>
     </div>
   </div>
 </section>
@@ -496,7 +496,7 @@ textarea.fin{resize:vertical;line-height:1.6}
 </footer>
 
 <div id="mCta">
-  <a class="s" href="#" onclick="openModal('inquiry');return false;">문의하기</a>
+  <a class="s" href="#" onclick="openModal('inquiry');return false;">상담신청</a>
   <a class="p" href="#" onclick="openModal('brochure');return false;">소개자료 받기</a>
 </div>
 
@@ -520,7 +520,8 @@ textarea.fin{resize:vertical;line-height:1.6}
       <div id="fieldsInquiry" class="hidden" style="display:flex;flex-direction:column;gap:15px">
         <div><label for="i-name" class="flabel">성함 <span style="color:#C0392B">*</span></label><input id="i-name" type="text" placeholder="홍길동" class="fin"></div>
         <div><label for="i-email" class="flabel">이메일 <span style="color:#C0392B">*</span></label><input id="i-email" type="email" placeholder="name@company.com" class="fin"></div>
-        <div><label for="i-msg" class="flabel">문의 내용 <span style="color:#C0392B">*</span></label><textarea id="i-msg" rows="4" placeholder="궁금한 점을 자유롭게 남겨주세요." class="fin"></textarea></div>
+        <div><label for="i-phone" class="flabel">연락처</label><input id="i-phone" type="tel" placeholder="010-0000-0000" class="fin"></div>
+        <div><label for="i-msg" class="flabel">상담 신청 내용 <span style="color:#C0392B">*</span></label><textarea id="i-msg" rows="4" placeholder="희망하시는 상담 내용이나 궁금한 점을 자유롭게 남겨주세요." class="fin"></textarea></div>
       </div>
       <button type="submit" id="submitBtn" class="msub">소개자료 요청하기</button>
       <p style="font-size:11.5px;color:#98A0AE;text-align:center;line-height:1.5;margin-top:2px">입력하신 정보는 문의 응대 목적으로만 사용됩니다.</p>
@@ -552,15 +553,15 @@ function openModal(kind){
   modalKind = kind;
   closeMenu();
   var isInq = kind === 'inquiry';
-  document.getElementById('modalTitle').textContent = isInq ? '문의하기' : '서비스 소개자료 받기';
+  document.getElementById('modalTitle').textContent = isInq ? '상담신청' : '서비스 소개자료 받기';
   document.getElementById('modalSub').textContent = isInq
-    ? '궁금한 점을 남겨주시면 담당자가 빠르게 답변드리겠습니다.'
+    ? '상담을 신청해 주시면 담당자가 빠르게 연락드리겠습니다.'
     : '정보를 남겨주시면 서비스 소개자료를 이메일로 보내드립니다.';
   document.getElementById('fieldsBrochure').classList.toggle('hidden', isInq);
   document.getElementById('fieldsInquiry').classList.toggle('hidden', !isInq);
   setRequired('fieldsBrochure', !isInq);
   setRequired('fieldsInquiry', isInq);
-  document.getElementById('submitBtn').textContent = isInq ? '문의 보내기' : '소개자료 요청하기';
+  document.getElementById('submitBtn').textContent = isInq ? '상담 신청하기' : '소개자료 요청하기';
   document.getElementById('modalForm').classList.remove('hidden');
   document.getElementById('sentPanel').classList.add('hidden');
   document.getElementById('modalOverlay').classList.add('open');
@@ -569,7 +570,7 @@ function openModal(kind){
 function setRequired(groupId, on){
   var els = document.getElementById(groupId).querySelectorAll('input,textarea');
   els.forEach(function(el){
-    var optional = el.id === 'b-phone' || el.id === 'b-url';
+    var optional = el.id === 'b-phone' || el.id === 'b-url' || el.id === 'i-phone';
     el.required = on && !optional;
   });
 }
@@ -590,10 +591,10 @@ document.getElementById('modalForm').addEventListener('submit', function(e){
     payload = { _subject: subject, 구분: '서비스 소개자료 요청', 성함: name, 쇼핑몰명: company, 이메일: email, 연락처: phone, '쇼핑몰 URL': url };
     body = ['SOHA 서비스 소개자료를 요청합니다.','','성함: '+name,'쇼핑몰명: '+company,'이메일: '+email,'연락처: '+phone,'쇼핑몰 URL: '+url].join('\n');
   } else {
-    var iname=g('i-name'), iemail=g('i-email'), imsg=g('i-msg');
-    subject = '[문의] ' + iname;
-    payload = { _subject: subject, 구분: '문의', 성함: iname, 이메일: iemail, '문의 내용': imsg };
-    body = ['문의 내용','──────────',imsg,'','성함: '+iname,'이메일: '+iemail].join('\n');
+    var iname=g('i-name'), iemail=g('i-email'), iphone=g('i-phone'), imsg=g('i-msg');
+    subject = '[상담신청] ' + iname;
+    payload = { _subject: subject, 구분: '상담 신청', 성함: iname, 이메일: iemail, 연락처: iphone, '상담 신청 내용': imsg };
+    body = ['상담 신청 내용','──────────',imsg,'','성함: '+iname,'이메일: '+iemail,'연락처: '+iphone].join('\n');
   }
   payload._captcha = 'false';
   payload._template = 'table';
@@ -604,7 +605,7 @@ document.getElementById('modalForm').addEventListener('submit', function(e){
     document.getElementById('sentPanel').classList.remove('hidden');
     if (window.lucide) lucide.createIcons();
     btn.disabled = false;
-    btn.textContent = modalKind === 'inquiry' ? '문의 보내기' : '소개자료 요청하기';
+    btn.textContent = modalKind === 'inquiry' ? '상담 신청하기' : '소개자료 요청하기';
   };
   fetch('https://formsubmit.co/ajax/contact@lunaelane.com', {
     method: 'POST',
