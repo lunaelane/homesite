@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://lunaelane.com/sitemap.xml
+Sitemap: https://www.lunaelane.com/sitemap.xml
