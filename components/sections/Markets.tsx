@@ -50,7 +50,7 @@ export default function Markets() {
           <div className="soha-rv soha-ba">
             <div className="soha-ba__photo">
               {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img src="/bg-busy.png" alt="" />
+              <img src="/bg-busy.png" alt="" loading="lazy" />
               <div className="soha-ba__fade-r" />
               <div className="soha-ba__fade-b" />
               <div className="soha-ba__fade-t" />
