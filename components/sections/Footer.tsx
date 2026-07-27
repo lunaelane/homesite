@@ -8,7 +8,7 @@ export default function Footer() {
           SOHA <span style={{ fontWeight: 400, color: '#9DB0D0', fontSize: 13 }}>| LUNAE LANE Inc.</span>
         </div>
         <div style={{ fontSize: 13.5, color: '#9DB0D0', textAlign: 'right', lineHeight: 1.7 }}>
-          {site.contactEmail}<br />© 2026 LUNAELANE Inc. All rights reserved.
+          루네레인 주식회사<br />{site.contactEmail}<br />© 2026 LUNAELANE Inc. All rights reserved.
         </div>
       </div>
     </footer>

@@ -6,8 +6,8 @@ import {
 } from 'lucide-react';
 
 export const site = {
-  title: '해외판매 파트너',
-  description: '상품등록만으로 해외 판매를 시작하세요',
+  title: '루네레인 LUNAELANE | 해외판매 파트너 SOHA',
+  description: '루네레인(LUNAELANE)은 한국 패션 쇼핑몰의 해외 판매를 지원하는 글로벌 커머스 기업입니다. 자체 시스템 SOHA로 상품등록만으로 동남아 해외 판매를 시작하세요.',
   url: 'https://www.lunaelane.com/',
   siteName: 'SOHA',
   naverVerification: '52f6b3d831c3cedbd2d72b850aefb0d476e39a87',

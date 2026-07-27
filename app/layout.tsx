@@ -33,7 +33,24 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard-dynamic-subset.css"
         />
       </head>
-      <body>{children}</body>
+      <body>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              '@context': 'https://schema.org',
+              '@type': 'Organization',
+              name: '루네레인',
+              alternateName: ['LUNAELANE', '루네레인 주식회사', 'SOHA'],
+              url: site.url,
+              logo: `${site.url}opengraph-image.png`,
+              email: site.contactEmail,
+              description: site.description,
+            }),
+          }}
+        />
+        {children}
+      </body>
     </html>
   );
 }
