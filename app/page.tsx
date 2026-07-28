@@ -7,6 +7,7 @@ import Hero from '@/components/sections/Hero';
 import Problem from '@/components/sections/Problem';
 import WhyLunaeLane from '@/components/sections/WhyLunaeLane';
 import WhatIsSoha from '@/components/sections/WhatIsSoha';
+import MarketMap from '@/components/sections/MarketMap';
 import Roles from '@/components/sections/Roles';
 import About from '@/components/sections/About';
 import Team from '@/components/sections/Team';
@@ -22,6 +23,7 @@ export default function Page() {
       <Problem />
       <WhyLunaeLane />
       <WhatIsSoha />
+      <MarketMap />
       <Roles />
       <SystemScroll />
       <About />

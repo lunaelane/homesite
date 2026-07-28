@@ -49,6 +49,14 @@ export const steps = [
   { step: 'STEP 04', title: '해외 고객', sub: '현지 환경에서 구매', bg: '#FFFFFF', border: '#E6E6E6', stepColor: '#16161A', titleColor: '#1B2A4A', subColor: '#566074' },
 ] as const;
 
+export const marketMap = {
+  eyebrow: 'WHY SOHA',
+  title: '한 번의 등록으로, 여러 시장으로',
+  lead: '현지 계정 개설부터 번역, 물류, 정산까지 — 해외 판매에 필요한 모든 과정을 SOHA가 대신합니다. 공급처는 상품을 등록하고 택배를 보내기만 하면 됩니다.',
+  image: '/market-map.jpg',
+  alt: '전 세계 물류망과 루네레인의 판매 시장을 표시한 지도',
+} as const;
+
 export const youList = ['상품 등록', '재고 관리', '국내 발송'] as const;
 export const sohaList = ['현지화', '플랫폼 등록', '주문 수집', '통합 재고 관리', '해외 배송', 'CS (고객 응대)'] as const;
 
