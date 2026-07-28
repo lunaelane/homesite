@@ -53,9 +53,43 @@ export const marketMap = {
   eyebrow: 'WHY SOHA',
   title: '한 번의 등록으로, 여러 시장으로',
   lead: '현지 계정 개설부터 번역, 물류, 정산까지 — 해외 판매에 필요한 모든 과정을 SOHA가 대신합니다. 공급처는 상품을 등록하고 택배를 보내기만 하면 됩니다.',
-  image: '/market-map.jpg',
-  alt: '전 세계 물류망과 루네레인의 판매 시장을 표시한 지도',
+  image: '/market-bg.jpg',
+  alt: '전 세계 물류망과 판매 시장을 표시한 지도',
 } as const;
+
+export const marketGroups = [
+  { label: 'SOUTHEAST ASIA', status: '', items: [
+    { c: 'Vietnam', ko: 'Vietnam', flag: 'vn' },
+    { c: 'Thailand', ko: 'Thailand', flag: 'th' },
+    { c: 'Philippines', ko: 'Philippines', flag: 'ph' },
+    { c: 'Malaysia', ko: 'Malaysia', flag: 'my' },
+    { c: 'Singapore', ko: 'Singapore', flag: 'sg' },
+    { c: 'Indonesia', ko: 'Indonesia', flag: 'id' },
+  ] },
+  { label: 'MIDDLE EAST', status: '', items: [
+    { c: 'Turkey', ko: 'Türkiye', flag: 'tr' },
+    { c: 'Saudi_Arabia', ko: 'Saudi Arabia', flag: 'sa' },
+    { c: 'United_Arab_Emirates', ko: 'U.A.E', flag: 'ae' },
+    { c: 'Iran', ko: 'Iran', flag: 'ir' },
+    { c: 'Iraq', ko: 'Iraq', flag: 'iq' },
+  ] },
+  { label: 'NORTH AFRICA', status: '', items: [
+    { c: 'Egypt', ko: 'Egypt', flag: 'eg' },
+    { c: 'Libya', ko: 'Libya', flag: 'ly' },
+    { c: 'Algeria', ko: 'Algeria', flag: 'dz' },
+    { c: 'Morocco', ko: 'Morocco', flag: 'ma' },
+    { c: 'Tunisia', ko: 'Tunisia', flag: 'tn' },
+  ] },
+] as const;
+
+export const platforms = [
+  { name: 'Shopee', logo: '/logo-shopee.png' },
+  { name: 'Lazada', logo: '/logo-lazada.png' },
+  { name: 'Tokopedia', logo: '/logo-tokopedia.png' },
+  { name: 'TikTok Shop', logo: '/logo-tiktokshop.png' },
+  { name: 'Noon', logo: '/logo-noon.png' },
+  { name: 'Jumia', logo: '/logo-jumia.svg' },
+] as const;
 
 export const youList = ['상품 등록', '재고 관리', '국내 발송'] as const;
 export const sohaList = ['현지화', '플랫폼 등록', '주문 수집', '통합 재고 관리', '해외 배송', 'CS (고객 응대)'] as const;

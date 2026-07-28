@@ -37,6 +37,69 @@ body {
 @media (max-width: 560px) { .soha-grid-4 { grid-template-columns: 1fr !important; } }
 @media (max-width: 768px) { .soha-syswrap { padding-left: 12px !important; padding-right: 12px !important; } }
 
+/* 시장 지도 섹션 */
+.mm-wrap { position: relative; width: 100%; aspect-ratio: 1672 / 810; overflow: hidden; background: #0F1A33; }
+.mm-static { position: absolute; left: 0; top: 4.2%; width: 100%; z-index: 1; display: block; }
+.mm-ovl { position: absolute; left: 0; top: 4.2%; width: 100%; z-index: 2; }
+.mm-ovl svg { width: 100%; display: block; }
+.mm-ovl .cty { stroke: transparent; transition: stroke .15s; }
+.mm-ovl .cty.on { stroke: #FFFFFF; }
+.mm-ovl .hit { fill: transparent; cursor: pointer; }
+.mm-tip { position: absolute; z-index: 4; pointer-events: none; opacity: 0; transition: opacity .12s; color: #FFFFFF; font-size: 14px; font-weight: 600; transform: translate(-50%,-160%); white-space: nowrap; text-shadow: 0 1px 8px rgba(0,0,0,.7), 0 0 2px rgba(0,0,0,.5); }
+
+/* 시장 지도 — 사진 안 좌우 리스트 (v5) */
+.mm-static { left: 17% !important; width: 66% !important; top: 17% !important; }
+.mm-ovl { left: 17% !important; width: 66% !important; top: 17% !important; }
+.mm-in { position: absolute; top: 50%; transform: translateY(-50%); z-index: 3; display: flex; flex-direction: column; gap: 26px; }
+.mm-in-l { left: 2.6%; }
+.mm-in-r { right: 2.6%; }
+.mm-group-in { text-align: left; }
+.mm-group-in .mm-glabel { color: #9DB0D0; }
+.mm-group-in .mm-gstatus { color: #6E82A3; }
+.mm-group-in .mm-cty { color: #8FA3C4; }
+.mm-group-in .mm-cty:hover, .mm-group-in .mm-cty.act { color: #FFFFFF; }
+.mm-plat { position: absolute; left: 0; right: 0; top: 5%; z-index: 3; display: flex; justify-content: center; align-items: center; gap: 30px; flex-wrap: wrap; }
+.mm-plat-label { flex-basis: 100%; text-align: center; font-size: 13px; font-weight: 700; letter-spacing: 1px; color: #9DB0D0; margin-bottom: 2px; }
+@media (min-width: 881px) { .mm-plat-below { display: none; } }
+@media (max-width: 880px) { .mm-plat { display: none; } }
+.mm-below { display: none; }
+.mm-group-below { text-align: center; }
+@media (max-width: 880px) {
+  .mm-in { display: none; }
+  .mm-static, .mm-ovl { left: 0 !important; width: 100% !important; }
+  .mm-below { display: flex; flex-wrap: wrap; justify-content: center; gap: 30px; margin-top: 36px; padding: 0 20px; }
+}
+
+/* 구 좌우 레이아웃 (v4) */
+.mm-layout { display: grid; grid-template-columns: 200px 1fr 200px; gap: 28px; align-items: center; max-width: 1400px; margin: 0 auto; padding: 0 40px; }
+.mm-side { display: flex; flex-direction: column; gap: 30px; }
+.mm-group { text-align: left; }
+.mm-glabel { font-size: 13px; font-weight: 700; letter-spacing: 1px; color: #566074; margin-bottom: 4px; }
+.mm-gstatus { font-size: 12px; color: #9AA3B5; margin-bottom: 10px; }
+.mm-glabel + .mm-list { margin-top: 10px; }
+.mm-list { list-style: none; display: flex; flex-direction: column; gap: 7px; padding: 0; margin: 0; }
+.mm-cty { display: inline-flex; align-items: center; gap: 8px; font-family: inherit; font-size: 13.5px; font-weight: 500; color: #9AA3B5; background: none; border: none; padding: 2px 0; cursor: pointer; transition: color .15s; letter-spacing: .3px; }
+.mm-cty:hover, .mm-cty.act { color: #1B2A4A; font-weight: 600; }
+.mm-cty-flag { width: 24px; height: 18px; border-radius: 2px; display: block; box-shadow: 0 0 0 1px rgba(0,0,0,.08); opacity: .85; transition: opacity .15s; }
+.mm-cty:hover .mm-cty-flag, .mm-cty.act .mm-cty-flag { opacity: 1; }
+@media (max-width: 880px) {
+  .mm-layout { grid-template-columns: 1fr; gap: 34px; padding: 0 20px; }
+  .mm-side { flex-direction: row; flex-wrap: wrap; gap: 28px; justify-content: center; }
+  .mm-side-l { order: 2; }
+  .mm-wrap { order: 1; }
+  .mm-side-r { order: 3; }
+  .mm-group { text-align: center; }
+  .mm-list { align-items: center; }
+}
+
+/* 시장 칩 + 툴팁 국기 */
+.mm-tip-flag { width: 18px; height: 13.5px; border-radius: 2px; display: block; box-shadow: 0 0 0 1px rgba(0,0,0,.08); }
+.mm-ovl .cty.chip-on { stroke: #FFFFFF; }
+.mm-chip { display: inline-flex; align-items: center; gap: 8px; font-family: inherit; font-size: 14px; font-weight: 600; color: #3C4658; background: #FFFFFF; border: 1px solid #D8DCE4; border-radius: 20px; padding: 8px 15px; cursor: pointer; transition: border-color .15s, background .15s, color .15s; }
+.mm-chip:hover { border-color: #1B2A4A; color: #1B2A4A; }
+.mm-chip.act { background: #1B2A4A; border-color: #1B2A4A; color: #FFFFFF; }
+.mm-chip-flag { width: 20px; height: 15px; border-radius: 2px; display: block; box-shadow: 0 0 0 1px rgba(0,0,0,.08); }
+
 /* 모바일 내비 */
 .soha-toggle { display: none; }
 @media (max-width: 780px) {
