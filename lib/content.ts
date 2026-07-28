@@ -49,22 +49,6 @@ export const steps = [
   { step: 'STEP 04', title: '해외 고객', sub: '현지 환경에서 구매', bg: '#FFFFFF', border: '#E6E6E6', stepColor: '#16161A', titleColor: '#1B2A4A', subColor: '#566074' },
 ] as const;
 
-// ⚠️ 인도네시아 포함 여부 확인 필요 (별도 확인 섹션 참고)
-export const markets = ['🇻🇳 베트남', '🇹🇭 태국', '🇵🇭 필리핀', '🇲🇾 말레이시아', '🇸🇬 싱가포르', '🇮🇩 인도네시아'] as const;
-
-export const beforeTags = [
-  { t: '현지 판매 계정 개설', v: 'a', deg: -3 },
-  { t: '상점 심사', v: 'b', deg: 2 },
-  { t: '번역 외주', v: 'c', deg: -2 },
-  { t: '환율 계산', v: 'a', deg: 3 },
-  { t: '국제 배송 계약', v: 'b', deg: -4 },
-  { t: '현지 CS', v: 'c', deg: 2 },
-  { t: '세금 신고', v: 'a', deg: -2 },
-  { t: '정산 관리', v: 'b', deg: 3 },
-] as const;
-
-export const afterItems = ['상품 등록', '택배 발송'] as const;
-
 export const youList = ['상품 등록', '재고 관리', '국내 발송'] as const;
 export const sohaList = ['현지화', '플랫폼 등록', '주문 수집', '통합 재고 관리', '해외 배송', 'CS (고객 응대)'] as const;
 
