@@ -1,25 +1,43 @@
 'use client';
 
-import { createContext, useContext, useState, useCallback } from 'react';
-import { Check } from 'lucide-react';
+import { createContext, useContext, useState, useCallback, useEffect, useRef } from 'react';
+import { Check, Mail } from 'lucide-react';
 import { site } from '@/lib/content';
 
 type ModalKind = 'brochure' | 'inquiry' | null;
+
+/** null=작성 중, 'sent'=서버 접수 완료, 'mailto'=전송 실패로 메일 앱에 넘김(=미접수) */
+type SendResult = null | 'sent' | 'mailto';
 
 const Ctx = createContext<{ open: (k: Exclude<ModalKind, null>) => void }>({ open: () => {} });
 export const useModal = () => useContext(Ctx);
 
 export default function ModalProvider({ children }: { children: React.ReactNode }) {
   const [modal, setModal] = useState<ModalKind>(null);
-  const [sent, setSent] = useState(false);
+  const [result, setResult] = useState<SendResult>(null);
   const [sending, setSending] = useState(false);
+  const dialogRef = useRef<HTMLDivElement>(null);
 
   const open = useCallback((k: Exclude<ModalKind, null>) => {
     document.getElementById('soha-navlinks')?.setAttribute('data-open', '0');
-    setSent(false);
+    setResult(null);
     setModal(k);
   }, []);
-  const close = useCallback(() => { setModal(null); setSent(false); }, []);
+  const close = useCallback(() => { setModal(null); setResult(null); }, []);
+
+  // ESC로 닫기
+  useEffect(() => {
+    if (!modal) return;
+    const onKey = (e: KeyboardEvent) => { if (e.key === 'Escape') close(); };
+    document.addEventListener('keydown', onKey);
+    return () => document.removeEventListener('keydown', onKey);
+  }, [modal, close]);
+
+  // 열릴 때 첫 입력란으로 포커스 이동
+  useEffect(() => {
+    if (!modal) return;
+    dialogRef.current?.querySelector<HTMLElement>('input, textarea')?.focus();
+  }, [modal]);
 
   async function submit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -52,13 +70,13 @@ export default function ModalProvider({ children }: { children: React.ReactNode 
       if (!r.ok) throw new Error('bad status');
       await r.json();
       setSending(false);
-      setSent(true);
+      setResult('sent');
     } catch {
-      // 네트워크/CORS 실패 시 메일 앱으로 폴백 (원본 동작 유지)
+      // 네트워크/CORS 실패 시 메일 앱으로 폴백. 아직 접수된 게 아니므로 'sent'와 구분한다.
       window.location.href =
         `mailto:${site.contactEmail}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
       setSending(false);
-      setSent(true);
+      setResult('mailto');
     }
   }
 
@@ -74,6 +92,7 @@ export default function ModalProvider({ children }: { children: React.ReactNode 
           style={{ position: 'fixed', inset: 0, zIndex: 1000, background: 'rgba(9,15,28,.62)', backdropFilter: 'blur(4px)', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: 24 }}
         >
           <div
+            ref={dialogRef}
             onClick={(e) => e.stopPropagation()}
             role="dialog"
             aria-modal="true"
@@ -92,7 +111,7 @@ export default function ModalProvider({ children }: { children: React.ReactNode 
               </p>
             </div>
 
-            {!sent ? (
+            {!result ? (
               <form onSubmit={submit} style={{ padding: '24px 36px 34px', display: 'flex', flexDirection: 'column', gap: 15 }}>
                 <div style={{ display: 'flex', flexDirection: 'column', gap: 15 }}>
                   <Field name="name" label="성함" required placeholder="홍길동" />
@@ -114,7 +133,7 @@ export default function ModalProvider({ children }: { children: React.ReactNode 
                   입력하신 정보는 문의 응대 목적으로만 사용됩니다.
                 </p>
               </form>
-            ) : (
+            ) : result === 'sent' ? (
               <div style={{ padding: '14px 36px 40px', textAlign: 'center' }}>
                 <div style={{ width: 56, height: 56, borderRadius: '50%', background: '#EAF3EC', color: '#2E8B57', display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '14px auto 20px' }}>
                   <Check size={28} />
@@ -122,6 +141,22 @@ export default function ModalProvider({ children }: { children: React.ReactNode 
                 <h4 style={{ fontSize: 19, fontWeight: 700, color: '#1B2A4A', marginBottom: 10 }}>정상적으로 접수되었습니다</h4>
                 <p style={{ fontSize: 14, color: '#566074', lineHeight: 1.65, marginBottom: 24 }}>
                   소중한 요청 감사합니다. 담당자가 확인 후<br />입력하신 이메일로 빠르게 연락드리겠습니다.
+                </p>
+                <button onClick={close} className="btn-close">닫기</button>
+              </div>
+            ) : (
+              <div style={{ padding: '14px 36px 40px', textAlign: 'center' }}>
+                <div style={{ width: 56, height: 56, borderRadius: '50%', background: '#FDF3E3', color: '#B7791F', display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '14px auto 20px' }}>
+                  <Mail size={28} />
+                </div>
+                <h4 style={{ fontSize: 19, fontWeight: 700, color: '#1B2A4A', marginBottom: 10 }}>메일 앱이 열렸습니다</h4>
+                <p style={{ fontSize: 14, color: '#566074', lineHeight: 1.65, marginBottom: 16 }}>
+                  자동 전송에 실패해 작성하신 내용을 메일 앱으로 옮겼습니다.<br />
+                  <strong style={{ color: '#1B2A4A', fontWeight: 700 }}>발송 버튼을 눌러야 접수됩니다.</strong>
+                </p>
+                <p style={{ fontSize: 13, color: '#98A0AE', lineHeight: 1.6, marginBottom: 24 }}>
+                  메일 앱이 열리지 않았다면 아래 주소로 보내주세요.<br />
+                  <a href={`mailto:${site.contactEmail}`} style={{ color: '#1B2A4A', fontWeight: 600 }}>{site.contactEmail}</a>
                 </p>
                 <button onClick={close} className="btn-close">닫기</button>
               </div>

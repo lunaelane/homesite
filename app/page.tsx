@@ -20,10 +20,10 @@ export default function Page() {
       <RevealInit />
       <Nav />
       <Hero />
+      <MarketMap />
       <Problem />
       <WhyLunaeLane />
       <WhatIsSoha />
-      <MarketMap />
       <Roles />
       <SystemScroll />
       <About />

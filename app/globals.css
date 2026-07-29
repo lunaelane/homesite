@@ -42,8 +42,8 @@ body {
 .mm-static { position: absolute; left: 0; top: 4.2%; width: 100%; z-index: 1; display: block; }
 .mm-ovl { position: absolute; left: 0; top: 4.2%; width: 100%; z-index: 2; }
 .mm-ovl svg { width: 100%; display: block; }
-.mm-ovl .cty { stroke: transparent; transition: stroke .15s; }
-.mm-ovl .cty.on { stroke: #FFFFFF; }
+.mm-ovl .cty { stroke: #9AD6FF; transition: stroke .8s ease, transform 2s cubic-bezier(.25,.8,.35,1); transform-box: fill-box; transform-origin: center; will-change: transform; }
+.mm-ovl .cty.on { stroke: #FFFFFF; transform: translate(0, -7px) scale(1.16); }
 .mm-ovl .hit { fill: transparent; cursor: pointer; }
 .mm-tip { position: absolute; z-index: 4; pointer-events: none; opacity: 0; transition: opacity .12s; color: #FFFFFF; font-size: 14px; font-weight: 600; transform: translate(-50%,-160%); white-space: nowrap; text-shadow: 0 1px 8px rgba(0,0,0,.7), 0 0 2px rgba(0,0,0,.5); }
 
@@ -57,7 +57,7 @@ body {
 .mm-group-in .mm-glabel { color: #9DB0D0; }
 .mm-group-in .mm-gstatus { color: #6E82A3; }
 .mm-group-in .mm-cty { color: #8FA3C4; }
-.mm-group-in .mm-cty:hover, .mm-group-in .mm-cty.act { color: #FFFFFF; }
+.mm-group-in .mm-cty:hover, .mm-group-in .mm-cty.act { color: #FFFFFF; transform: translateY(-4px) scale(1.18); transition: color .8s ease, transform 2s cubic-bezier(.25,.8,.35,1); }
 .mm-plat { position: absolute; left: 0; right: 0; top: 5%; z-index: 3; display: flex; justify-content: center; align-items: center; gap: 30px; flex-wrap: wrap; }
 .mm-plat-label { flex-basis: 100%; text-align: center; font-size: 13px; font-weight: 700; letter-spacing: 1px; color: #9DB0D0; margin-bottom: 2px; }
 @media (min-width: 881px) { .mm-plat-below { display: none; } }
@@ -70,35 +70,22 @@ body {
   .mm-below { display: flex; flex-wrap: wrap; justify-content: center; gap: 30px; margin-top: 36px; padding: 0 20px; }
 }
 
-/* 구 좌우 레이아웃 (v4) */
-.mm-layout { display: grid; grid-template-columns: 200px 1fr 200px; gap: 28px; align-items: center; max-width: 1400px; margin: 0 auto; padding: 0 40px; }
-.mm-side { display: flex; flex-direction: column; gap: 30px; }
-.mm-group { text-align: left; }
+/* 국가 리스트 (in / below 공통) */
 .mm-glabel { font-size: 13px; font-weight: 700; letter-spacing: 1px; color: #566074; margin-bottom: 4px; }
 .mm-gstatus { font-size: 12px; color: #9AA3B5; margin-bottom: 10px; }
 .mm-glabel + .mm-list { margin-top: 10px; }
 .mm-list { list-style: none; display: flex; flex-direction: column; gap: 7px; padding: 0; margin: 0; }
-.mm-cty { display: inline-flex; align-items: center; gap: 8px; font-family: inherit; font-size: 13.5px; font-weight: 500; color: #9AA3B5; background: none; border: none; padding: 2px 0; cursor: pointer; transition: color .15s; letter-spacing: .3px; }
+.mm-cty { display: inline-flex; align-items: center; gap: 8px; font-family: inherit; font-size: 13.5px; font-weight: 500; color: #9AA3B5; background: none; border: none; padding: 2px 0; cursor: pointer; transition: color .2s, transform .25s cubic-bezier(.34,1.4,.64,1); letter-spacing: .3px; transform-origin: left center; will-change: transform; }
 .mm-cty:hover, .mm-cty.act { color: #1B2A4A; font-weight: 600; }
 .mm-cty-flag { width: 24px; height: 18px; border-radius: 2px; display: block; box-shadow: 0 0 0 1px rgba(0,0,0,.08); opacity: .85; transition: opacity .15s; }
 .mm-cty:hover .mm-cty-flag, .mm-cty.act .mm-cty-flag { opacity: 1; }
 @media (max-width: 880px) {
-  .mm-layout { grid-template-columns: 1fr; gap: 34px; padding: 0 20px; }
-  .mm-side { flex-direction: row; flex-wrap: wrap; gap: 28px; justify-content: center; }
-  .mm-side-l { order: 2; }
   .mm-wrap { order: 1; }
-  .mm-side-r { order: 3; }
-  .mm-group { text-align: center; }
   .mm-list { align-items: center; }
 }
 
-/* 시장 칩 + 툴팁 국기 */
-.mm-tip-flag { width: 18px; height: 13.5px; border-radius: 2px; display: block; box-shadow: 0 0 0 1px rgba(0,0,0,.08); }
-.mm-ovl .cty.chip-on { stroke: #FFFFFF; }
-.mm-chip { display: inline-flex; align-items: center; gap: 8px; font-family: inherit; font-size: 14px; font-weight: 600; color: #3C4658; background: #FFFFFF; border: 1px solid #D8DCE4; border-radius: 20px; padding: 8px 15px; cursor: pointer; transition: border-color .15s, background .15s, color .15s; }
-.mm-chip:hover { border-color: #1B2A4A; color: #1B2A4A; }
-.mm-chip.act { background: #1B2A4A; border-color: #1B2A4A; color: #FFFFFF; }
-.mm-chip-flag { width: 20px; height: 15px; border-radius: 2px; display: block; box-shadow: 0 0 0 1px rgba(0,0,0,.08); }
+/* 자동 순환 하이라이트 */
+.mm-ovl .cty.chip-on { stroke: #FFFFFF; transform: translate(0, -7px) scale(1.16); }
 
 /* 모바일 내비 */
 .soha-toggle { display: none; }
@@ -142,6 +129,17 @@ textarea.fld { resize: vertical; line-height: 1.6; }
 
 /* 공통 레이아웃 */
 .wrap { max-width: 1120px; margin: 0 auto; padding: 0 40px; }
-.eyebrow { font-size: 13px; font-weight: 700; letter-spacing: 1px; color: #9AA3B5; margin-bottom: 14px; }
+.eyebrow { font-size: 13px; font-weight: 700; letter-spacing: 1px; color: #6B7488; margin-bottom: 14px; }
 .h2 { font-size: clamp(26px,3.4vw,38px); font-weight: 700; color: #1B2A4A; letter-spacing: -1px; margin-bottom: 14px; line-height: 1.32; }
 .lead { color: #566074; font-size: 17px; }
+
+/* ── 키보드 포커스 표시 ──────────────────────────────────────────── */
+/* 밝은 배경 위 (모달 폼, 모바일 국가 리스트) */
+.fld:focus-visible,
+.mm-cty:focus-visible { outline: 2px solid #1B2A4A; outline-offset: 2px; }
+
+/* 어두운 배경 위 (내비, 히어로·CTA 버튼, 지도 안 국가 리스트) */
+.nv-cta:focus-visible,
+.btn-primary:focus-visible,
+.btn-ghost:focus-visible,
+.mm-group-in .mm-cty:focus-visible { outline: 2px solid #FFFFFF; outline-offset: 3px; }

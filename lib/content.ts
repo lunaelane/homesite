@@ -17,6 +17,7 @@ export const site = {
 export const nav = [
   { href: '#problem', label: '왜 해외 판매가 어려운가' },
   { href: '#soha', label: 'SOHA란' },
+  { href: '#markets', label: '진출 시장' },
   { href: '#roles', label: '역할 분담' },
   { href: '#about', label: '회사 소개' },
   { href: '#team', label: '팀' },
@@ -50,7 +51,7 @@ export const steps = [
 ] as const;
 
 export const marketMap = {
-  eyebrow: 'WHY SOHA',
+  eyebrow: 'MARKETS',
   title: '한 번의 등록으로, 여러 시장으로',
   lead: '현지 계정 개설부터 번역, 물류, 정산까지 — 해외 판매에 필요한 모든 과정을 SOHA가 대신합니다. 공급처는 상품을 등록하고 택배를 보내기만 하면 됩니다.',
   image: '/market-bg.jpg',
