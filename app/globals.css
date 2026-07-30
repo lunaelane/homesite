@@ -38,18 +38,43 @@ body {
 @media (max-width: 768px) { .soha-syswrap { padding-left: 12px !important; padding-right: 12px !important; } }
 
 /* 시장 지도 섹션 */
-.mm-wrap { position: relative; width: 100%; aspect-ratio: 1672 / 810; overflow: hidden; background: #0F1A33; }
-.mm-static { position: absolute; left: 0; top: 4.2%; width: 100%; z-index: 1; display: block; }
+/* 페이지 관통 파티클 레이어 — Hero~MarketMap 을 감싸는 .globe-stage 안에 fixed 로 깔린다.
+   stage 배경(#0F1A33) 위에 그려지고, stage 뒤 섹션들은 stage 밖이라 자연히 캔버스를 덮는다. */
+.globe-stage { position: relative; z-index: 0; background: #0F1A33; }
+.pg-layer { position: fixed; inset: 0; z-index: 0; pointer-events: none; }
+.pg-bg, .pg-fg { position: absolute; inset: 0; display: block; }
+.pg-vignette { position: absolute; inset: 0;
+  background: radial-gradient(ellipse at 50% 48%, rgba(0,0,0,0) 42%, rgba(6,11,24,.30) 76%, rgba(6,11,24,.62) 100%); }
+
+.mm-wrap { position: relative; width: 100%; aspect-ratio: 1672 / 810; background: transparent; }
 .mm-ovl { position: absolute; left: 0; top: 4.2%; width: 100%; z-index: 2; }
 .mm-ovl svg { width: 100%; display: block; }
-.mm-ovl .cty { stroke: #9AD6FF; transition: stroke .8s ease, transform 2s cubic-bezier(.25,.8,.35,1); transform-box: fill-box; transform-origin: center; will-change: transform; }
-.mm-ovl .cty.on { stroke: #FFFFFF; transform: translate(0, -7px) scale(1.16); }
+/* 국가 점은 캔버스 파티클이 그린다 — 오버레이는 히트 영역 전용 */
+.mm-ovl .cty { display: none; }
 .mm-ovl .hit { fill: transparent; cursor: pointer; }
+
+/* 어두운 무대 위로 올라왔으므로 섹션 헤딩을 밝은 톤으로 */
+#markets .eyebrow { color: #9DB0D0; }
+#markets .h2 { color: #FFFFFF; }
+#markets .lead { color: #C3CFE3; }
+#markets .mm-group-below .mm-glabel { color: #9DB0D0; }
+#markets .mm-group-below .mm-gstatus { color: #6E82A3; }
+#markets .mm-group-below .mm-cty { color: #8FA3C4; }
+#markets .mm-group-below .mm-cty:hover, #markets .mm-group-below .mm-cty.act { color: #FFFFFF; }
 .mm-tip { position: absolute; z-index: 4; pointer-events: none; opacity: 0; transition: opacity .12s; color: #FFFFFF; font-size: 14px; font-weight: 600; transform: translate(-50%,-160%); white-space: nowrap; text-shadow: 0 1px 8px rgba(0,0,0,.7), 0 0 2px rgba(0,0,0,.5); }
 
-/* 시장 지도 — 사진 안 좌우 리스트 (v5) */
-.mm-static { left: 17% !important; width: 66% !important; top: 17% !important; }
+/* 시장 지도 — 지도 안 좌우 리스트 (v5) */
 .mm-ovl { left: 17% !important; width: 66% !important; top: 17% !important; }
+
+/* 모프 진행 중엔 UI 를 숨기고, 평면 완성 시점에 페이드인 */
+#markets .mm-ovl, #markets .mm-in, #markets .mm-plat, #markets .mm-below, #markets .mm-plat-below {
+  transition: opacity .55s ease;
+}
+#markets[data-flat="0"] .mm-ovl,
+#markets[data-flat="0"] .mm-in,
+#markets[data-flat="0"] .mm-plat,
+#markets[data-flat="0"] .mm-below,
+#markets[data-flat="0"] .mm-plat-below { opacity: 0; pointer-events: none; }
 .mm-in { position: absolute; top: 50%; transform: translateY(-50%); z-index: 3; display: flex; flex-direction: column; gap: 26px; }
 .mm-in-l { left: 2.6%; }
 .mm-in-r { right: 2.6%; }
@@ -66,7 +91,9 @@ body {
 .mm-group-below { text-align: center; }
 @media (max-width: 880px) {
   .mm-in { display: none; }
-  .mm-static, .mm-ovl { left: 0 !important; width: 100% !important; }
+  /* 모바일은 지도가 래퍼 폭을 꽉 채우고 세로 중앙에 (1400×690 비율) */
+  .mm-wrap { aspect-ratio: 1400 / 690; }
+  .mm-ovl { left: 0 !important; width: 100% !important; top: 50% !important; transform: translateY(-50%); }
   .mm-below { display: flex; flex-wrap: wrap; justify-content: center; gap: 30px; margin-top: 36px; padding: 0 20px; }
 }
 
@@ -84,8 +111,6 @@ body {
   .mm-list { align-items: center; }
 }
 
-/* 자동 순환 하이라이트 */
-.mm-ovl .cty.chip-on { stroke: #FFFFFF; transform: translate(0, -7px) scale(1.16); }
 
 /* 모바일 내비 */
 .soha-toggle { display: none; }

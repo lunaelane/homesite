@@ -42,3 +42,6 @@ next-env.d.ts
 dev.log
 *.log
 shots/
+
+# 참고용 프로토타입 (빌드/배포 제외)
+/reference/

@@ -1,24 +1,14 @@
-import Image from 'next/image';
 import { hero } from '@/lib/content';
 import ModalButton from '../ModalButton';
 
+/** 배경은 페이지 레벨 파티클 레이어(ParticleGlobeLayer)가 그린다 — 여기선 투명. */
 export default function Hero() {
   return (
-    <header id="top" style={{ position: 'relative', padding: '120px 0 110px', overflow: 'hidden', background: '#0F1A33' }}>
-      {/* 장식용 배경. 어두운 그라디언트가 최대 96% 덮으므로 저품질로 충분. */}
-      <Image
-        src={hero.bgImage}
-        alt=""
-        aria-hidden
-        fill
-        priority
-        quality={40}
-        sizes="100vw"
-        style={{ objectFit: 'cover', zIndex: 0 }}
-      />
+    <header id="top" style={{ position: 'relative', padding: '120px 0 110px', background: 'transparent' }}>
+      {/* 좌측 텍스트가 우측 구체와 겹치지 않도록 가독성 그라디언트만 얇게 */}
       <div
         aria-hidden
-        style={{ position: 'absolute', inset: 0, zIndex: 1, background: 'linear-gradient(105deg,rgba(9,15,28,.96) 0%,rgba(13,21,38,.9) 44%,rgba(18,29,50,.8) 74%,rgba(20,32,55,.72) 100%)' }}
+        style={{ position: 'absolute', inset: 0, zIndex: 0, background: 'linear-gradient(100deg,rgba(15,26,51,.92) 0%,rgba(15,26,51,.72) 38%,rgba(15,26,51,0) 62%)' }}
       />
       <div className="wrap" style={{ position: 'relative', zIndex: 2 }}>
         <div style={{ width: 48, height: 3, background: '#fff', marginBottom: 26 }} />

@@ -2,6 +2,7 @@ import ModalProvider from '@/components/ModalProvider';
 import RevealInit from '@/components/RevealInit';
 import Nav from '@/components/Nav';
 import SystemScroll from '@/components/SystemScroll';
+import ParticleGlobeLayer from '@/components/ParticleGlobeLayer';
 
 import Hero from '@/components/sections/Hero';
 import Problem from '@/components/sections/Problem';
@@ -19,8 +20,12 @@ export default function Page() {
     <ModalProvider>
       <RevealInit />
       <Nav />
-      <Hero />
-      <MarketMap />
+      {/* Hero ~ MarketMap 은 파티클 지구가 관통하는 한 무대 */}
+      <div className="globe-stage">
+        <ParticleGlobeLayer />
+        <Hero />
+        <MarketMap />
+      </div>
       <Problem />
       <WhyLunaeLane />
       <WhatIsSoha />
