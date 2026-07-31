@@ -5,11 +5,16 @@ import ModalButton from '../ModalButton';
 export default function Hero() {
   return (
     <header id="top" style={{ position: 'relative', padding: '120px 0 110px', background: 'transparent' }}>
-      {/* 좌측 텍스트가 우측 구체와 겹치지 않도록 가독성 그라디언트만 얇게 */}
-      <div
-        aria-hidden
-        style={{ position: 'absolute', inset: 0, zIndex: 0, background: 'linear-gradient(100deg,rgba(15,26,51,.92) 0%,rgba(15,26,51,.72) 38%,rgba(15,26,51,0) 62%)' }}
-      />
+      {/*
+        구체가 화면 중앙으로 오면서 좌측 텍스트와 겹친다.
+        파티클 쪽 알파를 깎는 대신 텍스트 뒤에 스크림을 깐다 —
+        배경 휘도가 파티클 밀도·자전 위상과 무관하게 고정되어 대비가 흔들리지 않고,
+        점마다 영역 판정을 추가하지 않으므로 렌더 비용도 늘지 않는다.
+        무대 배경색(#0F1A33)과 같은 색이라 구체 좌측이 그림자로 잠기는 것처럼 읽힌다.
+        아래쪽은 마스크로 서서히 걷어 MarketMap 과의 경계선이 보이지 않게 한다.
+      */}
+      <div aria-hidden className="hero-scrim" />
+      {/* 텍스트는 캔버스(.pg-layer, z-index 0)보다 항상 위 */}
       <div className="wrap" style={{ position: 'relative', zIndex: 2 }}>
         <div style={{ width: 48, height: 3, background: '#fff', marginBottom: 26 }} />
         <h1 style={{ fontSize: 'clamp(36px,5vw,52px)', fontWeight: 700, lineHeight: 1.28, letterSpacing: '-1.4px', color: '#fff', marginBottom: 24, maxWidth: 820 }}>
